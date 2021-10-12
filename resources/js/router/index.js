@@ -17,8 +17,8 @@ export const routes = [
         component: About
     },
     {
-        name: 'Product',
-        path: '/product',
+        name: 'product',
+        path: '/product/:id',
         component: Product
     }
 ];

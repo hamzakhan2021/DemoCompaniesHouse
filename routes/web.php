@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/unit', [CompanyController::class,'view_unit'])->name('view');
 Route::get('/search_unit', [CompanyController::class,'search_unit_by_key']);
+Route::get('/unitById/{id}', [CompanyController::class,'show'])->name('show');

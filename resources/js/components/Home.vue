@@ -116,26 +116,79 @@
 </div>
      </div>
 </div> -->
-<!-- <Select2  class="select" v-model="myValue" :options="myOptions" :settings="{ settingOption: value, settingOption: value }" @change="myChangeEvent($event)" @select="mySelectEvent($event)" />
-    <h4>Value: {{ myValue }}</h4> -->
- <div class="p-6">
-      <div class="bg-white flex items-center rounded-full shadow-xl">
-        <input class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" type="text" @keyup="searchUnit" placeholder="Search Company" v-model="search" id="search">
+
+<div  class="flex flex-col items-center" >
+   <div class="bg-white flex items-center shadow-xl" style="width: 557px; border">
+        <input class="l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" type="text" @keyup="searchUnit" placeholder="Search Company" v-model="search" id="search">
         
         <div class="p-4">
           <button class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
             icon
           </button>
           </div>
-      <div>
-        <ul v-for="unit in units.data" :key="unit.id">
-          <li>{{ unit.root_domain }}</li>
-          <li>{{ unit.domain_authority }}</li>
-        </ul>
-      </div>
+  
+    </div>
+</div>
+
+<div v-if="units.data">
+<div class="searchBox" >
+    <div class="w-full md:w-1/2 flex flex-col items-center">
+        <div class="w-full px-4">
+            <div class="flex flex-col items-center relative">
+               
+                <div class="absolute shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
+                    <div class="flex flex-col w-full">
+                        <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
+                            <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                                  <ul>
+                                <li v-for="unit in units.data" :key="unit.id">
+                                <router-link :to="{name: 'product', params: { id: unit.id }}">
+                                <span class="w-9 flex flex-col items-center">
+                                    <span class="flex relative w-10 h-10 bg-orange-500 justify-center items-center m-1 mr-2 w-5 h-5 mt-1 rounded-full "><img :src="unit.img"> </span>
+                                </span>
+                                <span></span>
+                                <span class="w-full items-center flex" >
+                                    <span class="mx-10 -mt-11  ">{{ unit.root_domain }}
+                                        <span class="text-xs truncate w-full normal-case font-normal -mt-1 text-gray-500"> &nbsp;&nbsp;Domain Authority &nbsp; {{ unit.domain_authority }}</span>
+                                    </span>
+                                </span>
+                                </router-link>
+                              </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-       <div class="card-body" id="hide_again">
-    <!-- <table id="" class="table table-bordered table-striped">
+    </div>
+</div> 
+</div>  
+
+<div v-if="search !== '' && units.data == '' ">
+<div class="searchBox" >
+    <div class="w-full md:w-1/2 flex flex-col items-center">
+        <div class="w-full px-4">
+            <div class="flex flex-col items-center relative">
+               
+                <div class="absolute shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
+                    <div class="flex flex-col w-full">
+                        <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
+                            <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                                <span class="text-xs truncate w-full normal-case font-normal -mt-1 text-gray-500">Data not found</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+</div>    
+
+    <main>
+      <!-- <div class="card-body" id="hide_again">
+    <table id="" class="table table-bordered table-striped">
       <thead>
       <tr>
          <th>Name</th>
@@ -143,70 +196,17 @@
        </tr>
       </thead>
      <tbody>
-        <tr v-for="unit in units.data" :key="unit.id">
-          <td>{{ unit.name }}</td>
-          <td>{{ unit.is_active == 1 ? 'Active' : 'InActive' }}</td>
+        <tr v-for="unit in units.data" :key="unit.root_domain">
+          <td>{{ unit.root_domain }}</td>
+          <td>{{ unit.domain_authority }}</td>
         </tr>
      </tbody>
      <pagination :data="units" @pagination-change-page="getResults"></pagination>
-    </table> -->
+    </table>
 
-  </div>
- </div>
-<div>
-    <div class="w-full md:w-1/2 flex flex-col items-center">
-        <div class="w-full px-4">
-            <div class="flex flex-col items-center relative">
-                <div class="w-full">
-                    <div class="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                        <div class="flex flex-auto flex-wrap"></div>
-                        <input placeholder="Search by position" class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
-                        <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
-                            <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up w-4 h-4">
-                                    <polyline points="18 15 12 9 6 15"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="absolute shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
-                    <div class="flex flex-col w-full">
-                        <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
-                            <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                                  <a  v-for="unit in units.data" :key="unit.id">
-                                <span class="w-6 flex flex-col items-center">
-                                    <span class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full "><img src="https://logo.clearbit.com/" {{unit.root_domain}} "?size=200&greyscale=true"> </span>
-                                </span>
-                                <span class="w-full items-center flex" >
-                                    <span class="mx-2 -mt-1  ">{{ unit.root_domain }}
-                                        <span class="text-xs truncate w-full normal-case font-normal -mt-1 text-gray-500">CEO &amp; managin director</span>
-                                    </span>
-                                  
-                                </span>
-                                </a>
-                            </div>
-                        </div>
-                      
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
- <!-- <input type="text" @keyup="searchUnit" placeholder="Search" v-model="search" class="form-control form-control-sm"> -->
-
-    <!-- <div class="p-6">
-      <div class="bg-white flex items-center rounded-full shadow-xl">
-       <pagination :data="units" @pagination-change-page="getResults"></pagination>
-        </div>
-      </div> -->
-    <!-- </div> -->
-       
-
-    <main>
+  </div> -->
       <!-- Category section -->
-      <section aria-labelledby="category-heading" class="pt-24 sm:pt-32 xl:max-w-7xl xl:mx-auto xl:px-8">
+      <!-- <section aria-labelledby="category-heading" class="pt-24 sm:pt-32 xl:max-w-7xl xl:mx-auto xl:px-8">
         <div class="px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0">
           <h2 id="category-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">Shop by Category</h2>
           <a href="#" class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">Browse all categories<span aria-hidden="true"> &rarr;</span></a>
@@ -231,7 +231,8 @@
         <div class="mt-6 px-4 sm:hidden">
           <a href="#" class="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Browse all categories<span aria-hidden="true"> &rarr;</span></a>
         </div>
-      </section>
+      </section> -->
+<!-- <VueTailwindPagination :current="currentPage" :total="total" :per-page="perPage" @page-changed="getResults"/> -->
 
       <!-- Featured section -->
       <section aria-labelledby="social-impact-heading" class="max-w-7xl mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:px-8">
@@ -370,7 +371,11 @@
 <script>
 import { ref } from 'vue'
   import _ from "lodash";
-  import pagination from 'laravel-vue-pagination'; 
+  import '@ocrv/vue-tailwind-pagination/styles'
+  import VueTailwindPagination from '@ocrv/vue-tailwind-pagination'
+
+
+  //  import pagination from 'laravel-vue-pagination'
 import Select2 from 'vue3-select2-component';
 import {
   Dialog,
@@ -534,6 +539,7 @@ const footerNavigation = {
 
 export default {
   components: {
+    VueTailwindPagination,
       Select2,
     Dialog,
     DialogOverlay,
@@ -558,8 +564,11 @@ export default {
     const mobileMenuOpen = ref(false)
 
     return {
-      units: [],
+      units: {},
       search: '',
+      currentPage: 1,
+      perPage: 2,
+      total: 20,
       currencies,
       navigation,
       categories,
@@ -572,12 +581,15 @@ export default {
   },
   methods: {
     fetchingAllUnit() {
-          axios.get("api/unit").then( data => (this.units = data.data));
+          axios.get("api/unit").then( data => {
+            // this.units = data.data
+            }
+            );
         },
         getResults(page = 1) {
-              axios.get('api/unit?page=' + page)
+              axios.get('api/unit?page=' + page + this.search)
                 .then(response => {
-                  this.customers = response.data;
+                  this.units.data = response.data;
                   console.log('paginate Data');
                   console.log(response.data);
               });
@@ -588,6 +600,7 @@ export default {
                 .then((response)=>{
                 this.units.data = response.data.unit
                 this.myOptions = response.data.unit
+               this.$forceUpdate();
                 console.log('search_unit Data');
                   console.log(this.units.data);
           })
@@ -611,5 +624,11 @@ export default {
     .bottom-100 {bottom: 100%}
     .max-h-select {
         max-height: 300px;
+    }
+
+    .searchBox{
+      margin-left: 461px; 
+      width: 1175px; 
+      margin-top: 7px;
     }
 </style>

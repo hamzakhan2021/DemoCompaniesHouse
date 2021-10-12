@@ -13,6 +13,10 @@ app.config.globalProperties.$axios = axios;
 // Define a new global component called button-counter
 app.use(router)
 
+
+// app.component('pagination', require('laravel-vue-pagination'));
+
+
 app.component('Select2', Select2);
 
 app.mount("#app");

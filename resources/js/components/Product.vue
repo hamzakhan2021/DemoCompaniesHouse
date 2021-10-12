@@ -31,7 +31,7 @@
           </li>
           <li class="text-sm">
             <a :href="product.href" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">
-              {{ product.name }}
+              {{ product.root_domain }}
             </a>
           </li>
         </ol>
@@ -41,7 +41,7 @@
           <div class="lg:col-start-8 lg:col-span-5">
             <div class="flex justify-between">
               <h1 class="text-xl font-medium text-gray-900">
-                {{ product.name }}
+                {{ product.root_domain }}
               </h1>
               <p class="text-xl font-medium text-gray-900">
                 {{ product.price }}
@@ -71,7 +71,7 @@
             <h2 class="sr-only">Images</h2>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
-              <img v-for="image in product.images" :key="image.id" :src="image.imageSrc" :alt="image.imageAlt" :class="[image.primary ? 'lg:col-span-2 lg:row-span-2' : 'hidden lg:block', 'rounded-lg']" />
+              <img v-for="image in product.images" :key="image.id" :src="image.imageSrc" :alt="image.imageAlt" :class="rounded-lg" />
             </div>
           </div>
 
@@ -173,34 +173,16 @@ import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { CurrencyDollarIcon, GlobeIcon } from '@heroicons/vue/outline'
 
 const product = {
-  name: 'Basic Tee',
-  price: '$35',
+  root_domain: '',
+  price: '$50',
   rating: 3.9,
   reviewCount: 512,
-  href: '#',
+  href: '',
   breadcrumbs: [
     { id: 1, name: 'Women', href: '#' },
     { id: 2, name: 'Clothing', href: '#' },
   ],
   images: [
-    {
-      id: 1,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg',
-      imageAlt: "Back of women's Basic Tee in black.",
-      primary: true,
-    },
-    {
-      id: 2,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg',
-      imageAlt: "Side profile of women's Basic Tee in black.",
-      primary: false,
-    },
-    {
-      id: 3,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg',
-      imageAlt: "Front of women's Basic Tee in black.",
-      primary: false,
-    },
   ],
   colors: [
     { name: 'Black', bgColor: 'bg-gray-900', selectedColor: 'ring-gray-900' },
@@ -214,10 +196,7 @@ const product = {
     { name: 'L', inStock: true },
     { name: 'XL', inStock: false },
   ],
-  description: `
-    <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-    <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
-  `,
+  description: "",
   details: [
     'Only the best materials',
     'Ethically and locally made',
@@ -242,11 +221,30 @@ export default {
     const selectedSize = ref(product.sizes[2])
 
     return {
+      unit:{},
       product,
       policies,
       selectedColor,
       selectedSize,
     }
   },
+  methods: {
+    feAllUnit() {
+        axios.get("/unitById/"+this.$route.params.id).then( data => {
+          // this.product = data.data.unit;
+          this.product.root_domain = data.data.unit.root_domain;
+          this.product.description = data.data.unit.domain_analysis;
+          this.product.images.imageSrc = data.data.unit.img;
+           this.product.rating = data.data.unit.linking_root_domains;
+           this.product.href = data.data.unit.domain_analysis;
+           this.$forceUpdate();
+          });
+      },
+  },
+    created(){
+
+        this.feAllUnit();
+
+    },
 }
 </script>

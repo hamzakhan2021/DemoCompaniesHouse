@@ -23,12 +23,18 @@ class CompanyController extends Controller
         return view('unit');
     }
 
-    public function search_unit_by_key()
+    public function search_unit_by_key(Request $request)
     {
-    	$key = \Request::get('q');
+    	$key = $request->get('q');
         $unit = Company::where('root_domain','LIKE',"%{$key}%")
-                                    ->orWhere('domain_authority','LIKE',"%{$key}%")
-                                    ->get();
+                        ->orWhere('domain_authority','LIKE',"%{$key}%")
+                        ->get();
+
+        foreach($unit as $key => $value)
+        {
+            $imgLink = "https://logo.clearbit.com/".$value->root_domain."?size=200&greyscale=true";
+            $unit[$key]['img'] =$imgLink;
+        }
 
     	return response()->json([ 'unit' => $unit ],Response::HTTP_OK);
     }
@@ -60,9 +66,14 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($id)
     {
-        //
+        $unit = Company::find($id);
+      
+        $imgLink = "https://logo.clearbit.com/".$unit->root_domain."?size=200&greyscale=true";
+        $unit['img'] =$imgLink;
+       
+        return response()->json([ 'unit' => $unit ],Response::HTTP_OK);
     }
 
     /**

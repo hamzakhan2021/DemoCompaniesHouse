@@ -22,10 +22,12 @@
     "dependencies": {
         "@headlessui/vue": "^1.4.1",
         "@heroicons/vue": "^1.0.4",
+        "@ocrv/vue-tailwind-pagination": "0.0.4",
         "@vue-hero-icons/outline": "^1.7.2",
         "@vue-hero-icons/solid": "^1.7.2",
         "laravel-vue-pagination": "^2.3.1",
         "vue": "^3.2.20",
+        "vue-click-outside": "^1.1.0",
         "vue-router": "^4.0.11",
         "vue-tailwind": "^2.5.0",
         "vue3-select2-component": "^0.1.7"
