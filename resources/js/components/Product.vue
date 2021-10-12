@@ -60,7 +60,7 @@
                 </div>
                 <div aria-hidden="true" class="ml-4 text-sm text-gray-300">·</div>
                 <div class="ml-4 flex">
-                  <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">See all {{ product.reviewCount }} reviews</a>
+                  <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Linking Root Domains</a>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
             <h2 class="sr-only">Images</h2>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
-              <img v-for="image in product.images" :key="image.id" :src="image.imageSrc" :alt="image.imageAlt" :class="rounded-lg" />
+              <img  :src="imageSrc" :class="rounded-lg" />
             </div>
           </div>
 
@@ -99,7 +99,7 @@
               </div>
 
               <!-- Size picker -->
-              <div class="mt-8">
+              <!-- <div class="mt-8">
                 <div class="flex items-center justify-between">
                   <h2 class="text-sm font-medium text-gray-900">Size</h2>
                   <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">See sizing chart</a>
@@ -119,9 +119,9 @@
                     </RadioGroupOption>
                   </div>
                 </RadioGroup>
-              </div>
+              </div> -->
 
-              <button type="submit" class="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to cart</button>
+              <button type="submit" class="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Checkout</button>
             </form>
 
             <!-- Product details -->
@@ -224,17 +224,17 @@ export default {
       unit:{},
       product,
       policies,
+      imageSrc: '',
       selectedColor,
       selectedSize,
     }
   },
   methods: {
-    feAllUnit() {
+    getUnit() {
         axios.get("/unitById/"+this.$route.params.id).then( data => {
-          // this.product = data.data.unit;
           this.product.root_domain = data.data.unit.root_domain;
           this.product.description = data.data.unit.domain_analysis;
-          this.product.images.imageSrc = data.data.unit.img;
+          this.imageSrc = data.data.unit.img;
            this.product.rating = data.data.unit.linking_root_domains;
            this.product.href = data.data.unit.domain_analysis;
            this.$forceUpdate();
@@ -243,7 +243,7 @@ export default {
   },
     created(){
 
-        this.feAllUnit();
+        this.getUnit();
 
     },
 }

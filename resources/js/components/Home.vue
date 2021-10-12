@@ -627,7 +627,7 @@ export default {
     }
 
     .searchBox{
-      margin-left: 461px; 
+      margin-left: 353px; 
       width: 1175px; 
       margin-top: 7px;
     }
