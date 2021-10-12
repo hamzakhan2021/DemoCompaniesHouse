@@ -99,7 +99,7 @@
              <router-link to="/about">
               
              <ShoppingBagIcon class="flex-shrink-0 h-6 w-6 text-white" aria-hidden="true" />
-                          <span class="ml-2 text-sm font-medium text-white">0</span>
+                          <!-- <span class="ml-2 text-sm font-medium text-white">0</span> -->
                            </router-link>
           </a>
         </div>

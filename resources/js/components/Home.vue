@@ -123,7 +123,7 @@
         
         <div class="p-4">
           <button class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
-            icon
+           <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </button>
           </div>
   
@@ -596,7 +596,7 @@ export default {
         },
 
         searchUnit:_.debounce(function(){
-          axios.get('/search_unit?q='+this.search)
+          axios.get('/search_unit?searchKey='+this.search)
                 .then((response)=>{
                 this.units.data = response.data.unit
                 this.myOptions = response.data.unit

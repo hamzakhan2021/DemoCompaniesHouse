@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/unit', [CompanyController::class,'view_unit'])->name('view');
-Route::get('/search_unit', [CompanyController::class,'search_unit_by_key']);
+Route::get('/unit', [CompanyController::class,'viewUnit'])->name('view');
+Route::get('/search_unit', [CompanyController::class,'searchCompany']);
 Route::get('/unitById/{id}', [CompanyController::class,'show'])->name('show');

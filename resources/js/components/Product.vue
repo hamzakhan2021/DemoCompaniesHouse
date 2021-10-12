@@ -19,7 +19,7 @@
     <div class="pt-6 pb-16 sm:pb-24">
       <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ol role="list" class="flex items-center space-x-4">
-          <li v-for="breadcrumb in product.breadcrumbs" :key="breadcrumb.id">
+          <!-- <li v-for="breadcrumb in product.breadcrumbs" :key="breadcrumb.id">
             <div class="flex items-center">
               <a :href="breadcrumb.href" class="mr-4 text-sm font-medium text-gray-900">
                 {{ breadcrumb.name }}
@@ -28,7 +28,7 @@
                 <path d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z" fill="currentColor" />
               </svg>
             </div>
-          </li>
+          </li> -->
           <li class="text-sm">
             <a :href="product.href" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">
               {{ product.root_domain }}

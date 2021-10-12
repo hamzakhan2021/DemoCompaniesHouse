@@ -18,14 +18,14 @@ class CompanyController extends Controller
         //
     }
 
-    public function view_unit()
+    public function viewUnit()
     {  
         return view('unit');
     }
 
-    public function search_unit_by_key(Request $request)
+    public function searchCompany(Request $request)
     {
-    	$key = $request->get('q');
+    	$key = $request->get('searchKey');
         $unit = Company::where('root_domain','LIKE',"%{$key}%")
                         ->orWhere('domain_authority','LIKE',"%{$key}%")
                         ->get();
